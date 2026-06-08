@@ -138,7 +138,7 @@
             this.Controls.Add(this.lblParca);
             this.Controls.Add(this.cmbParcalar);
             this.Name = "Form1";
-            this.Text = "Lotus Döküm - Maliyet Hesaplama Sistemi";
+            this.Text = "Lotus Döküm - Maliyet Hesaplama Sistemi ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetay)).EndInit();
