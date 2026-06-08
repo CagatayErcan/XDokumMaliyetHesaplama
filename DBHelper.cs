@@ -1,12 +1,14 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace XDokumMaliyetHesaplama
 {
     public static class DBHelper
     {
-        // BAĞLANTI STRİNGİ - BURAYI KENDİ SQL SUNUCUNUZA GÖRE DÜZENLEYİN!
-        private static string baglantiCumlesi = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=XDokumMaliyet;Integrated Security=True";
+        // YENİ: Bağlantı cümlesini App.config'den oku
+        private static string baglantiCumlesi = ConfigurationManager.ConnectionStrings["XDBaglantisi"].ConnectionString;
+
 
         public static DataTable GetParcalar()
         {
