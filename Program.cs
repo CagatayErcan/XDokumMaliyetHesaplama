@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace XDokumMaliyetHesaplama
 {
     internal static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            // Önce server seçim formunu göster
+            frmServerSecim serverSecim = new frmServerSecim();
+            serverSecim.ShowDialog();
+
+            // Eğer kullanıcı geçerli bir seçim yaptıysa ve bağlantı ayarları varsa ana formu aç
+            if (!string.IsNullOrEmpty(BaglantiAyarlari.ServerAdresi))
+            {
+                Application.Run(new Form1());
+            }
         }
     }
 }

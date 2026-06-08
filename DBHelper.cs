@@ -1,19 +1,19 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 namespace XDokumMaliyetHesaplama
 {
     public static class DBHelper
     {
-        // YENİ: Bağlantı cümlesini App.config'den oku
-        private static string baglantiCumlesi = ConfigurationManager.ConnectionStrings["XDBaglantisi"].ConnectionString;
-
+        private static string GetBaglantiCumlesi()
+        {
+            return BaglantiAyarlari.GetBaglantiCumlesi();
+        }
 
         public static DataTable GetParcalar()
         {
             DataTable dt = new DataTable();
-            using (SqlConnection baglanti = new SqlConnection(baglantiCumlesi))
+            using (SqlConnection baglanti = new SqlConnection(GetBaglantiCumlesi()))
             {
                 string sorgu = "SELECT ParcaID, ParcaAdi FROM Parcalar WHERE Aktif = 1";
                 SqlDataAdapter adapter = new SqlDataAdapter(sorgu, baglanti);
@@ -25,7 +25,7 @@ namespace XDokumMaliyetHesaplama
         public static DataTable GetMaliyetDetay(int parcaID)
         {
             DataTable dt = new DataTable();
-            using (SqlConnection baglanti = new SqlConnection(baglantiCumlesi))
+            using (SqlConnection baglanti = new SqlConnection(GetBaglantiCumlesi()))
             {
                 string sorgu = @"SELECT mk.KalemAdi, mk.Birim, pmd.BirimTuketim, pmd.BirimMaliyet_USD, 
                                         (pmd.BirimTuketim * pmd.BirimMaliyet_USD) AS Tutar_USD, pmd.Aciklama
